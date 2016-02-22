@@ -1,0 +1,15 @@
+# Site settings
+title: gskema
+description: >
+  Hello! My name is Gytis and I am a web developer.
+  I interested in new things and technologies.
+baseurl: ""
+url: "https://gskema.github.io"
+twitter_username: gytskem
+github_username:  gskema
+
+# URL settings
+permalink: ":categories/:slug"
+
+# Build settings
+markdown: kramdown
