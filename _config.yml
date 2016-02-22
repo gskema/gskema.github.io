@@ -13,3 +13,4 @@ permalink: ":categories/:slug"
 
 # Build settings
 markdown: kramdown
+exclude: ["README.md"]
