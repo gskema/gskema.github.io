@@ -4,6 +4,7 @@ title:  "How to install PHP7 LAMP server on Ubuntu"
 date:   2016-02-18 22:26:24 +0200
 category: [tutorial, linux]
 slug: "how-to-install-php7-lamp-server-on-ubuntu"
+key: "php7-lamp"
 tags: [php, linux]
 description: >
   A tutorial on how to set up a LAMP stack with PHP7 on Ubuntu
@@ -142,13 +143,13 @@ rename it and customize it for each website:
 Paste this inside `<VirtualHost>`:
 
     ServerName mydevsite.dev # This may be a real domain .com or local domain .dev for development
-    
+
     # Rhis specifies directives for the directory where our website files reside
     <Directory "/var/www/html">
       # This allows having .htaccess file in the website folder which overrides the directory for that website only
       Require all granted
       AllowOverride All
-      
+
       Options +MultiViews # This allows entering URLs for directories with ending slashes '/' and without ''
                           # May be useful if you're running a Jekyll website, for example
     </Directory>
@@ -156,8 +157,8 @@ Paste this inside `<VirtualHost>`:
 If you added a new `.conf` file for a new newsitem, you need to enable it:
 
     sudo a2ensite mysite
-    sudo apache2ctl restart    
-    
+    sudo apache2ctl restart
+
 If you only modified an existing configuration, you still need to reload the configuration:
 
     sudo apache2ctl restart
@@ -167,7 +168,7 @@ If you only modified an existing configuration, you still need to reload the con
 To install **MySql**, we have to install `mysql-server` package:
 
     sudo apt-get install mysql-server
-    
+
 Once you have that installed, it is recommended to run MySQL set up scripts:
 
     sudo mysql_install_db
