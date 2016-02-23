@@ -54,7 +54,7 @@ Also, don't forget to enable these modules:
 
 This enabled `mod_rewrite` and `mod_actions`.
 
-## The tricky parts
+## How to set up apache permission
 
 Now, remember how every time someone sets up a LAMP stack or tries to install a WordPress plugin
 the permission are always wrong?
@@ -115,6 +115,8 @@ Some insist that you have to stop it and start it (instead of using restart):
 
     sudo apache2ctl stop
     sudo apache2ctl start
+
+## How to set up apache hosts
 
 Now that we have that set up, we will need to set up websites.
 If you're trying to run a single website, you'll need to edit
