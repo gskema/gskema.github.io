@@ -185,3 +185,41 @@ To have MySQL working with PHP, we need one more package:
 
 That's it. You're now good to go. Additionally, you may opt-in for `phpMyAdmin` package, which will
 help you work wil MySQL via web interface.
+
+## phpMyAdmin setup
+
+You have a couple of options install phpMyAdmin on your server.
+phpMyAdmin is basically just a PHP app that connects and manages your
+MySQL database.
+
+You may install it using package manager:
+
+  sudo apt-get install phpmyadmin
+
+Benefits of installing phpMyAdmin this way:
+
+  - package can be easily updated using `apt-get`
+  - phpMyAdmin is installed in a secure location on the system
+  - package creates custom apache directives, making it more secure
+
+Another way to install phpMyAdmin is just downloading it from web:
+
+  [phpmyadmin.net](https://www.phpmyadmin.net/)
+
+You will a `.zip` which you can extract wherever you want.
+If you're running a VPS, you can extract it to the root folder of your website,
+making it accessible via `http://youwebsite.com/phpmyadmin`.
+This is a great option if you want to manage your database along with
+your website.
+
+If you're setting up a local developments environment, a good way to go about it
+would be to make a `pma/` folder in your **vhosts** directory (wherever you keep your website files),
+add `127.0.0.1 pma` to `/etc/hosts/` and make a new website directive in
+`/etc/apache2/sites-available/pma.conf`
+
+This would make phpMyAdmin accessible via `http://pma/`,
+which is pretty neat, I think.
+
+P.S. You may need to install `php7.0-mbstring` package if you get an
+error while trying to access phpMyAdmin. Some of these packages are required
+to make phpMyAdmin work with translations.
