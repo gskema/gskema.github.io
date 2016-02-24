@@ -55,7 +55,7 @@ Also, don't forget to enable these modules:
 
 This enabled `mod_rewrite` and `mod_actions`.
 
-## How to set up apache permission
+## How to set up apache permissions
 
 Now, remember how every time someone sets up a LAMP stack or tries to install a WordPress plugin
 the permission are always wrong?
@@ -116,6 +116,21 @@ Some insist that you have to stop it and start it (instead of using restart):
 
     sudo apache2ctl stop
     sudo apache2ctl start
+
+You can test if the apache `umask` work by making a test script
+
+**make.php**
+
+    <?php file_put_contents('testfile.txt', 'Test file content.');
+
+Call this script from inside your browser once,
+then go to the folder where this script is located and check the permissions of files in this
+folder:
+
+    ls -la
+
+If file `testfile.txt` exists and has `664` permissions, this confirms that apache `umask`
+is working.
 
 ## How to set up apache hosts
 
