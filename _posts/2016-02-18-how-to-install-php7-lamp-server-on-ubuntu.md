@@ -47,13 +47,25 @@ To enable this `.conf` file, ubuntu apache has convenient shortcut:
 
     sudo a2enconf php-fpm.conf
 
-Which just creates a shortcut to `/etc/apache/conf-available/php-fpm.con` in `/etc/apache/conf-enabled/php-fpm.conf`
+Which just creates a shortcut to `/etc/apache/conf-available/php-fpm.conf` in `/etc/apache/conf-enabled/php-fpm.conf`
 
 Also, don't forget to enable these modules:
 
-    sudo a2enmod rewrite actions
+    sudo a2enmod rewrite actions fastcgi mpm_event
 
-This enabled `mod_rewrite` and `mod_actions`.
+And disable these:
+
+    sudo a2dismod php7.0
+
+This will disable `mod_php_` which is default apache PHP handler.
+
+To enable new handler to `/etc/apache2/conf-available/` and check what
+`.conf` files exists for `php-fpm`. Make sure to enable only one (preferable the one we had created):
+
+    sudo a2enconf php-fpm.conf
+
+I found that there was another file `php7.0-fpm.conf`, which was probably installed by a module.
+I tried using it but it didn't work, so I disabled it with `a2disconf` and enabled the one we had created.
 
 ## How to set up apache permissions
 
