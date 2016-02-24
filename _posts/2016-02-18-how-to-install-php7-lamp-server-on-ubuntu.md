@@ -2,6 +2,7 @@
 layout: post
 title:  "How to install PHP7 LAMP server on Ubuntu"
 date:   2016-02-18 22:26:24 +0200
+update: 2016-02-24 16:26:11 +0200
 category: [tutorial, linux]
 slug: "how-to-install-php7-lamp-server-on-ubuntu"
 key: "php7-lamp"
