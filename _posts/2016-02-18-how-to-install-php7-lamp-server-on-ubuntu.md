@@ -213,9 +213,19 @@ making it accessible via `http://youwebsite.com/phpmyadmin`.
 This is a great option if you want to manage your database along with
 your website.
 
-If you're setting up a local developments environment, a good way to go about it
+Pros of this method:
+
+ - Easy to do if you're putting it alongside with an existing website
+ - May download the latest version
+
+Cons
+
+ - Less secure, unless you set it up to be secure via apache directives
+ - Cannot be automatically update, may be left not updated for a long time
+
+If you're setting up a local development environment, a good way to go about setting up access
 would be to make a `pma/` folder in your **vhosts** directory (wherever you keep your website files),
-add `127.0.0.1 pma` to `/etc/hosts/` and make a new website directive in
+adding `127.0.0.1 pma` to `/etc/hosts/` and making a new website directives in
 `/etc/apache2/sites-available/pma.conf`
 
 This would make phpMyAdmin accessible via `http://pma/`,
