@@ -24,7 +24,7 @@ We can now fetch some packages:
 
 You may also opt in for some additional packages like:
 
-    sudo apt-get install php7.0-mcrypt php7.0-gd php7.0-xml php7.0-mbstring php7.0-zip
+    sudo apt-get install php7.0-mcrypt php7.0-gd php7.0-xml php7.0-mbstring php7.0-zip php7.0-curl
 
 
 Then, we have to 'hook up' our PHP handler to Apache:
