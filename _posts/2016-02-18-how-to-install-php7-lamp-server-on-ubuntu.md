@@ -195,7 +195,7 @@ MySQL database.
 
 You may install it using package manager:
 
-  sudo apt-get install phpmyadmin
+    sudo apt-get install phpmyadmin
 
 Benefits of installing phpMyAdmin this way:
 
@@ -207,7 +207,7 @@ Another way to install phpMyAdmin is just downloading it from web:
 
   [phpmyadmin.net](https://www.phpmyadmin.net/)
 
-You will a `.zip` which you can extract wherever you want.
+You will get a `.zip` which you can extract wherever you want.
 If you're running a VPS, you can extract it to the root folder of your website,
 making it accessible via `http://youwebsite.com/phpmyadmin`.
 This is a great option if you want to manage your database along with
