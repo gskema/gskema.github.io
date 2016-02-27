@@ -11,7 +11,16 @@ description: >
   A tutorial on how to set up a LAMP stack with PHP7 on Ubuntu
 ---
 
-First of all, add a custom `ppa` from which we will receive PHP7 packages:
+To install **PHP7**, we must check whether PHP7 packages are already
+included in our Linux ditribution:
+
+    apt-get cache search php7.0-
+
+If you see a list of `php7.0-*` packages, that means your distribution
+officially has them and you can skip the next step.
+
+If you don't see the any `php7.0-*` packages, then you must add an
+unofficial **ppa**, which distributes **PHP7** packages:
 
     sudo add-apt-repository ppa:ondrej/php
     sudo apt-get update
@@ -22,12 +31,17 @@ We can now fetch some packages:
 
     sudo apt-get install apache2 php7.0 php7.0-fpm libapache2-mod-fastcgi
 
-You may also opt in for some additional packages like:
+These are the basic packages that will allow to run `apache` and `php` via `php-fpm`
+Now it looks like `php7.0` comes with fewer packages (almost none at all)
+installed by default. This saves us from having unnecessary packages in
+our PHP processes, which gives us better performance, also a more granular
+control over what packages are installed.
+
+These are some of the packages that I needed later (which come by default in `php5.0`):
 
     sudo apt-get install php7.0-mcrypt php7.0-gd php7.0-xml php7.0-mbstring php7.0-zip php7.0-curl
 
-
-Then, we have to 'hook up' our PHP handler to Apache:
+Now that we have tha packages sorted out, let's move on to configuration `php-fpm`:
 
     sudo nano /etc/apache2/conf-available/php-fpm.conf
 
@@ -53,18 +67,18 @@ Also, don't forget to enable these modules:
 
     sudo a2enmod rewrite actions fastcgi mpm_event
 
-And disable these:
+And disable this module, which is `mod_php`:
 
     sudo a2dismod php7.0
 
 This will disable `mod_php_` which is default apache PHP handler.
 
-To enable new handler to `/etc/apache2/conf-available/` and check what
+To enable new handler, go to `/etc/apache2/conf-available/` and check what
 `.conf` files exists for `php-fpm`. Make sure to enable only one (preferable the one we had created):
 
     sudo a2enconf php-fpm.conf
 
-I found that there was another file `php7.0-fpm.conf`, which was probably installed by a module.
+I found that there was another file `php7.0-fpm.conf`, which was probably automatically installed by a module.
 I tried using it but it didn't work, so I disabled it with `a2disconf` and enabled the one we had created.
 
 ## How to set up apache permissions
@@ -111,24 +125,46 @@ When `user1` creates a new file, the initial permissions for that file are `664`
 
 Apache, however, creates new files with `644` and `755` permissions. This may be bad for us, for example if we want to
 delete cache files created by `apache` we won't be able to. To make `apache` have `664` and `775` permissions, you
-need to change it's umask:
+need to change it's umask.
+
+Changing `umask` can be very difficult since there is no official setting
+and it may be hard to track down what processes boot up apache process.
+
+If you're running **PHP** on `mod_php_`, it may be as easy as changing it in this file:
 
     sudo nano /etc/apache2/envvars
 
-and paste this at the end of the file:
+and pasting this at the end of the file:
 
     # umask 002 to create files with 0664 and folders with 0775
     umask 002
 
-Save it. Now for reasons unknown it may not take effect just by running `sudo apache2ctl restart`. You can try though.
-If you're trying to install LAMP on local PC, I recommend restarting your PC. If you're running VPS... Well then try
-different methods of restarting apache or restart the server.
+If you're running `php-fpm` (which we are), then the common answer
+is to edit `php7.0-fpm` configuration file:
 
-Some insist that you have to stop it and start it (instead of using restart):
+    sudo /etc/init.d/php7.0-fpm
 
-    sudo apache2ctl stop
-    sudo apache2ctl start
+And then appending `umask 0002` to the end of the file.
 
+If you're attempting the two methods above, don't forget to restart
+`apache` and `php7.0-fpm`. You may even need to restart you computer or VPS.
+
+This method didn't work for me. After hours of searching, I found a couple of sources
+that suggesting editing another file:
+
+    sudo nano /etc/systemd/system/php7.0-fpm.service.d/php7.0-fpm.service.conf
+
+And pasting this (notice the uppercase letters):
+
+    [Service]
+    UMask=0002
+
+To have these changes applied, restart the services:
+
+    sudo systemctl daemon-reload
+    sudo service apache2 restart && sudo service php7.0-fpm restart
+
+This method worked, and probably should work for you too.
 You can test if the apache `umask` work by making a test script
 
 **make.php**
