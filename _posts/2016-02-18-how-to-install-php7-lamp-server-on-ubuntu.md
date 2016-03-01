@@ -14,7 +14,7 @@ description: >
 To install **PHP7**, we must check whether PHP7 packages are already
 included in our Linux ditribution:
 
-    apt-get cache search php7.0-
+    apt-cache search php7.0-
 
 If you see a list of `php7.0-*` packages, that means your distribution
 officially has them and you can skip the next step.
