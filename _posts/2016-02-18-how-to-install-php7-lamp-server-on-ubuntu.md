@@ -12,7 +12,7 @@ description: >
 ---
 
 To install **PHP7**, we must check whether PHP7 packages are already
-included in our Linux ditribution:
+included in our Linux distribution:
 
     apt-cache search php7.0-
 
@@ -41,7 +41,7 @@ These are some of the packages that I needed later (which come by default in `ph
 
     sudo apt-get install php7.0-mcrypt php7.0-gd php7.0-xml php7.0-mbstring php7.0-zip php7.0-curl
 
-Now that we have tha packages sorted out, let's move on to configuration `php-fpm`:
+Now that we have the packages sorted out, let's move on to configuration `php-fpm`:
 
     sudo nano /etc/apache2/conf-available/php-fpm.conf
 
@@ -248,7 +248,7 @@ To have MySQL working with PHP, we need one more package:
     sudo apt-get install php7.0-mysql
 
 That's it. You're now good to go. Additionally, you may opt-in for `phpMyAdmin` package, which will
-help you work wil MySQL via web interface.
+help you work with MySQL via web interface.
 
 ## phpMyAdmin setup
 
