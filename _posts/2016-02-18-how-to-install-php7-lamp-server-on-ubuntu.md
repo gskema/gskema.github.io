@@ -110,7 +110,7 @@ Now, here comes the magic bit:
 
 You need to use this command when setting permissions:
 
-    sudo chmod 2755 html/
+    sudo chmod 2775 html/
 
 Notice the number `2` at the beginning? This is called the **sticky bit**. It tells that any sub-files and sub-folders
 in this folder should inherit the group.
