@@ -210,8 +210,9 @@ Paste this inside `<VirtualHost>`:
 
     ServerName mydevsite.dev # This may be a real domain .com or local domain .dev for development
 
+    DocumentRoot /home/user/www/mydevsite
     # Rhis specifies directives for the directory where our website files reside
-    <Directory "/var/www/html">
+    <Directory "/home/user/www/mydevsite">
       # This allows having .htaccess file in the website folder which overrides the directory for that website only
       Require all granted
       AllowOverride All
